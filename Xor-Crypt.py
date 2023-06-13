@@ -6,7 +6,7 @@ import hashlib
 
 class XorCryption:
     def __init__(self, encryption_key=None):
-        self.alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits
+        self.alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
         self.encryption_key = encryption_key or self.generate_encryption_key()
 
     def generate_encryption_key(self):
