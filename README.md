@@ -1,7 +1,5 @@
 # Python-Encryption  
-​​​​​   
-
-
+​​
 This is a simple and custom encryption method made in Python. It utilizes a combination of XOR and symmetric key encryption  
 
 More specifically, it uses a one-time pad approach where the message is XORed with a random key that is generated from the encryption key. Then, the result is XORed with an initialization vector before being passed through a hash function (this is used to verify keys). Finally, the result is encoded in base64.  
