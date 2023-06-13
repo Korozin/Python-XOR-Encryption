@@ -4,7 +4,7 @@ import base64
 import hashlib
 
 
-class CustomEncryption:
+class XorCryption:
     def __init__(self, encryption_key=None):
         self.alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits
         self.encryption_key = encryption_key or self.generate_encryption_key()
