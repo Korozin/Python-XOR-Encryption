@@ -1,28 +1,31 @@
-import string
-import random
+import string 
+import secrets
 import base64
 import hashlib
-
 
 class XorCryption:
     def __init__(self, encryption_key=None):
         self.alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-        self.encryption_key = encryption_key or self.generate_encryption_key()
+        self.encryption_key_bytes = encryption_key.encode() or self.generate_encryption_key()
+        
+    def remove_special_chars(self, string):
+        special_chars = ["'", '"', '\\']
+        for char in special_chars:
+            string = string.replace(char, '')
+        return string
 
-    def generate_encryption_key(self):
-        print('Generated unique key as one was not provided\n')
-        encryption_key = list(self.alphabet)
-        random.shuffle(encryption_key)
-        return ''.join(encryption_key)
+    def generate_encryption_key(self):     
+        encryption_key = ''.join(secrets.choice(self.alphabet) for i in range(94))
+        encryption_key = self.remove_special_chars(encryption_key)
+        self.encryption_key_bytes = encryption_key.encode()
+        return self.encryption_key_bytes
 
     def encrypt(self, message):
         self.message = message
         message_bytes = message.encode()
-        key_bytes = self.encryption_key.encode()
+        key_bytes = self.encryption_key_bytes
 
-        initialization_vector = bytes([
-            random.randint(0, 255) for _ in range(16)
-        ])
+        initialization_vector = secrets.token_bytes(16)
 
         ciphertext_bytes = bytes([
             message_bytes[i] ^ key_bytes[i % len(key_bytes)]
@@ -43,7 +46,7 @@ class XorCryption:
         return ciphertext, initialization_vector
 
     def decrypt(self, ciphertext, initialization_vector):
-        key_bytes = self.encryption_key.encode()
+        key_bytes = self.encryption_key_bytes
 
         ciphertext_bytes_with_checksum = base64.b64decode(ciphertext.encode())
         initialization_vector_bytes = base64.b64decode(initialization_vector.encode())
