@@ -18,15 +18,15 @@ ciphertext, initialization_vector = encryption.encrypt('Hello, world!')
 print('Original Message:', encryption.message)
 print('Encrypted Message:', ciphertext)
 print('Initialization Vector:', initialization_vector)
-print('Used Encryption Key:', encryption.encryption_key)
+print('Used Encryption Key:', encryption.encryption_key_bytes.decode())
 ```
 
 and here is an example of how a message can be decrypted
 
 ```python
-encryption = XorCryption('gI7PY5Tor0JNcLZwmxDCBF1VWjvX2MAHiqnRK349tdbUfQ68yShkpGazEOslue')
-ciphertext = '39HXVrwNFclZP3EJ0uOjAh3RiB/ew6JB77JK2cflWBXeOl6Y+03tEd465S+U'
-initialization_vector = '8RYFpM1UmQnDeMMF1vCbdw=='
+encryption = XorCryption('(^yPu[v&gyVvc??OsZ{l,M;$]].~&2bjGGVk~S&al+KK4W{)Z{}efO33!h<L+Vm;ojyKfbL/EN1MGhj&I>MJ(-qX~V*+')
+ciphertext = 'xhiQHoC9elO1ocNqWfN65Ebd9LjzxHH+KJ7gG7jzm9X81sbiJQ10EN3L3wUS'
+initialization_vector = 'nO3T3j96IkHVwOUXUGMPTA=='
 plaintext = encryption.decrypt(ciphertext, initialization_vector)
 
 print('Encrypted message:', ciphertext)
