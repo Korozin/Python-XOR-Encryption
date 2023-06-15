@@ -6,7 +6,11 @@ import hashlib
 class XorCryption:
     def __init__(self, encryption_key=None):
         self.alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-        self.encryption_key_bytes = encryption_key.encode() or self.generate_encryption_key()
+
+        if encryption_key == None:
+            self.encryption_key_bytes = self.generate_encryption_key()
+        else:
+            self.encryption_key_bytes = encryption_key.encode()
         
     def remove_special_chars(self, string):
         special_chars = ["'", '"', '\\']
